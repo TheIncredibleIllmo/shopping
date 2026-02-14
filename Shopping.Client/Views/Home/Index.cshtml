@@ -1,0 +1,46 @@
+﻿@using System.Linq
+@model IEnumerable<Shopping.Client.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No products available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th class="text-end">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Category</td>
+                    <td>@item.Description</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageFile))
+                        {
+                            <img src="@item.ImageFile" alt="@item.Name" style="max-width:100px; height:auto;" />
+                        }
+                    </td>
+                    <td class="text-end">@item.Price.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
